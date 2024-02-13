@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>My first quiz</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+    <div class="app">
+        <h1>My First Quiz Ever (it's only one question because I no smart)</h1>
+        <div class="quiz">
+            <h2 id="question">How much wood could a woodchuchk chuck if a woodchuck could chuck wood?</h2>
+            <div id="answer-buttons">
+                <button class="btn">yes</button>
+                <button class="btn correct-answer">a woodchuck would chuck as much as a woodchuck could chuck if a woodchuck could chuck wood</button>
+                <button class="btn">what the hell is even that</button>
+                <button class="btn">can I go home now</button>
+            </div>
+            <button id="next-button">Next</button>
+        </div>
+    </div>
+
+    <!-- <script src="script.js"></script> -->
+
+    <p>Score: <span class="score-element">0</span></p>
+
+    <script>
+        let myButtons = document.querySelectorAll(".btn");
+        let scoreElement = document.querySelector(".score-element");
+        let score = 0;
+        let nextButton = document.getElementById("next-button");
+    
+        function disableButtons() {
+            for (let button of myButtons) {
+                button.disabled = true;
+            }
+        }
+    
+        function showNextButton() {
+            nextButton.style.display = "block";
+        }
+    
+        function checkAnswer(event) {
+            let button = event.target;
+            let isCorrect = button.classList.contains("correct-answer");
+            button.classList.add("clicked");
+            if (isCorrect) {
+                score++;
+                scoreElement.innerText = score;
+                button.classList.add("correct");
+            } else {
+                button.classList.add("incorrect");
+            }
+            disableButtons();
+            showNextButton();
+        }
+    
+        for (let button of myButtons) {
+            button.onclick = checkAnswer;
+        }
+    </script>
+    </body>
+
+</html>
